@@ -38,16 +38,14 @@ def sign_up_by_html(request):
                 info['error'] = 'Пароли не совпадают'
             elif age < 18:
                 info['error'] = 'Вы должны быть старше 18'
+            elif Buyer.objects.filter(name=username).exists():
+                info['error'] = 'Пользователь уже существует'
             else:
-                if Buyer.objects.filter(name=username).exists():
-                    info['error'] = 'Пользователь уже существует'
-                else:
+                Buyer.objects.create(name=username, password=password, age=age)
+                return render(request, 'success.html', {'username': username})
 
-                    Buyer.objects.create(name=username, password=password, age=age)
-                    return render(request, 'success.html', {'username': username})
-
-            info['form'] = form
-            return render(request, 'registration_page.html', info)
+        info['form'] = form
+    return render(request, 'registration_page.html', info)
 
 
 def shop(request):
