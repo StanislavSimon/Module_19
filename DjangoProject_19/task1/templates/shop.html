@@ -1,0 +1,15 @@
+{% extends 'menu.html' %}
+{% block content %}
+    <h1>Магазин</h1>
+
+
+    <h1>Список игр</h1>
+    <ul>
+        {% for game in games %}
+            <li>{{ game.title }} | {{ game.description }}. Стоимость: {{ game.cost }} $</li>
+        <li> <button>Купить</button></li>
+    {% endfor %}
+
+        <button onclick="window.location.href='{% url 'home' %}'">На главную</button>
+{% endblock %}
+
