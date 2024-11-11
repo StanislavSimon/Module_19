@@ -41,7 +41,7 @@ def sign_up_by_html(request):
             elif Buyer.objects.filter(name=username).exists():
                 info['error'] = 'Пользователь уже существует'
             else:
-                Buyer.objects.create(name=username, password=password, age=age)
+                Buyer.objects.create(name=username, balance=0.00, age=age)
                 return render(request, 'success.html', {'username': username})
 
         info['form'] = form
